@@ -1,0 +1,62 @@
+name: Deploy Google Cloud Run
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  docker-build:
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - run: echo "${{ secrets.PROD_ENV }}" > default.yml
+      - run: echo '${{ secrets.SERVICE_ACCOUNT_KEY }}' > auth.json
+
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.SERVICE_ACCOUNT }}
+
+      - name: Configure Docker
+        run: gcloud auth configure-docker ${{ secrets.CONTAINER_REGISTRY }}
+
+      - uses: docker/setup-buildx-action@v2
+
+      - name: Docker build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./CustomDockerfile
+          push: true
+          tags: ${{ secrets.CONTAINER_REGISTRY }}/${{ secrets.PROJECT }}/${{ secrets.REGISTRY_NAME }}/${{ secrets.PROD_IMAGE_NAME }}:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  cloud-run-deploy:
+    needs: docker-build
+
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.SERVICE_ACCOUNT }}
+
+      - name: Deploy Docker image
+        run: gcloud run deploy yodangang-express --image ${{ secrets.CONTAINER_REGISTRY }}/${{ secrets.PROJECT }}/${{ secrets.REGISTRY_NAME }}/${{ secrets.PROD_IMAGE_NAME }}:latest --region ${{ secrets.REGION }} --platform managed --max-instances 3 --cpu 1 --memory 1Gi --allow-unauthenticated --port 3000
