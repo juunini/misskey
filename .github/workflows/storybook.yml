@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master
-      - develop
+      - no-develop
       - dev/storybook8 # for testing
   pull_request_target:
 

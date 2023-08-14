@@ -3,7 +3,7 @@ name: Publish Docker image (develop)
 on:
   push:
     branches:
-      - develop
+      - no-develop
   workflow_dispatch:
 
 env:

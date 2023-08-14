@@ -1,0 +1,13 @@
+name: "Reviewer lottery"
+on:
+  pull_request_target:
+    types: []
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3.5.3
+    - uses: uesteibar/reviewer-lottery@v3
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}

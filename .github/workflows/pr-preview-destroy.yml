@@ -1,8 +1,8 @@
 # file: .github/workflows/preview-closed.yaml
 on:
   pull_request:
-    types:
-      - closed
+    types: []
+      # - no-closed
 
 name: Destroy preview environment
 

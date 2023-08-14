@@ -3,8 +3,8 @@ name: Test (production install and build)
 on:
   push:
     branches:
-      - master
-      - develop
+      - no-master
+      - no-develop
   pull_request:
 
 env:

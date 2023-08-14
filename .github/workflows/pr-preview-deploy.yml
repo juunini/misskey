@@ -1,7 +1,7 @@
 # Run secret-dependent integration tests only after /deploy approval
 on:
   repository_dispatch:
-    types: [deploy-command]
+    types: []
 
 name: Deploy preview environment
 
