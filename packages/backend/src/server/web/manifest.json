@@ -1,6 +1,6 @@
 {
-	"short_name": "Misskey",
-	"name": "Misskey",
+	"short_name": "요단강 익스프레스",
+	"name": "요단강 익스프레스",
 	"start_url": "/",
 	"display": "standalone",
 	"background_color": "#313a42",
