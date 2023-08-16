@@ -4,12 +4,14 @@ COPY . /misskey
 WORKDIR /misskey
 USER root
 
+ENV NODE_ENV=production 
+
 RUN git submodule update --init
 RUN corepack enable
 RUN pnpm install --frozen-lockfile --force; exit 0
 RUN pnpm build; exit 0
 
-FROM juunini/misskey:redis-0.1
+FROM juunini/misskey:builder-0.1
 
 RUN gcsFuseRepo=gcsfuse-`lsb_release -c -s` &&\
     echo "deb http://packages.cloud.google.com/apt $gcsFuseRepo main" | \
@@ -45,6 +47,5 @@ HEALTHCHECK --interval=5s --retries=20 CMD ["/bin/bash", "/misskey/healthcheck.s
 ENTRYPOINT ["/usr/bin/tini", "--"]
 
 EXPOSE 3000
-CMD redis-server &\
-  gcsfuse --key-file /misskey/auth.json yodangang-express /misskey/files &&\
+CMD gcsfuse --key-file /misskey/auth.json yodangang-express /misskey/files &&\
   pnpm run start
