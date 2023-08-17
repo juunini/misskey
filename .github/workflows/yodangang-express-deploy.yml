@@ -16,9 +16,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - run: echo "${{ secrets.PROD_ENV }}" > default.yml
-      - run: echo '${{ secrets.SERVICE_ACCOUNT_KEY }}' > auth.json
-
       - id: 'auth'
         uses: 'google-github-actions/auth@v1'
         with:
@@ -40,23 +37,15 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-  # cloud-run-deploy:
-  #   needs: docker-build
+  ssh-deploy:
+    needs: docker-build
+    runs-on: ubuntu-latest
 
-  #   permissions:
-  #     contents: 'read'
-  #     id-token: 'write'
-
-  #   runs-on: ubuntu-latest
-
-  #   steps:
-  #     - uses: actions/checkout@v3
-
-  #     - id: 'auth'
-  #       uses: 'google-github-actions/auth@v1'
-  #       with:
-  #         workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
-  #         service_account: ${{ secrets.SERVICE_ACCOUNT }}
-
-  #     - name: Deploy Docker image
-  #       run: gcloud run deploy yodangang-express --image ${{ secrets.CONTAINER_REGISTRY }}/${{ secrets.PROJECT }}/${{ secrets.REGISTRY_NAME }}/${{ secrets.PROD_IMAGE_NAME }}:latest --region ${{ secrets.REGION }} --platform managed --max-instances 3 --cpu 1 --memory 1Gi --allow-unauthenticated --port 3000
+    steps:
+      - uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: sh start-docker-server.sh
