@@ -90,6 +90,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 		</div>
 		<div :class="$style.footerRight">
 			<button v-tooltip="i18n.ts.previewNoteText" class="_button" :class="[$style.footerButton, { [$style.previewButtonActive]: showPreview }]" @click="showPreview = !showPreview"><i class="ti ti-eye"></i></button>
+			<small style="display: flex; align-items: center;">{{ maxTextLength - textLength }}</small>
 			<!--<button v-tooltip="i18n.ts.more" class="_button" :class="$style.footerButton" @click="showingOptions = !showingOptions"><i class="ti ti-dots"></i></button>-->
 		</div>
 	</footer>
@@ -1269,7 +1270,7 @@ defineExpose({
 	flex: 0;
 	margin-left: auto;
 	display: grid;
-	grid-auto-flow: row;
+	grid-auto-flow: column;
 	grid-template-columns: repeat(auto-fill, minmax(42px, 1fr));
 	grid-auto-rows: 40px;
 	direction: rtl;
