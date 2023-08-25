@@ -1,17 +1,17 @@
-FROM juunini/misskey:builder-0.1 AS builder
+FROM juunini/misskey:builder-0.2 AS builder
 
 COPY . /misskey
 WORKDIR /misskey
 USER root
 
-ENV NODE_ENV=production 
+ENV NODE_ENV=production
 
 RUN git submodule update --init
 RUN corepack enable
-RUN pnpm install --frozen-lockfile --force; exit 0
-RUN pnpm build; exit 0
+RUN pnpm install
+RUN pnpm build
 
-FROM juunini/misskey:builder-0.1
+FROM juunini/misskey:builder-0.2
 
 RUN apt install -y tini
 
@@ -39,4 +39,3 @@ ENTRYPOINT ["/usr/bin/tini", "--"]
 
 EXPOSE 3000
 CMD ["pnpm", "run", "start"]
-  
