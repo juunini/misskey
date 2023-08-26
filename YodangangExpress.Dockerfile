@@ -30,6 +30,7 @@ COPY --from=builder /misskey/packages/backend/check_connect.js /misskey/packages
 COPY --from=builder /misskey/packages/backend/ormconfig.js /misskey/packages/backend/ormconfig.js
 COPY --from=builder /misskey/packages/backend/node_modules /misskey/packages/backend/node_modules
 COPY --from=builder /misskey/packages/backend/built /misskey/packages/backend/built
+COPY --from=builder /misskey/packages/backend/assets /misskey/packages/backend/assets
 COPY --from=builder /misskey/fluent-emojis /misskey/fluent-emojis
 
 ENV NODE_ENV=production
