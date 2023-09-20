@@ -5,11 +5,9 @@ SPDX-License-Identifier: AGPL-3.0-only
 
 <template>
 <div v-if="hasDisconnected && defaultStore.state.serverDisconnectedBehavior === 'quiet'" :class="$style.root" class="_panel _shadow" @click="resetDisconnected">
-	<div><i class="ti ti-alert-triangle"></i> {{ i18n.ts.disconnectedFromServer }}</div>
-	<div :class="$style.command" class="_buttons">
-		<MkButton small primary @click="reload">{{ i18n.ts.reload }}</MkButton>
-		<MkButton small>{{ i18n.ts.doNothing }}</MkButton>
-	</div>
+	<MkButton small primary rounded :class="$style.refreshButton" :aria-label="i18n.ts.reload" @click="reload">
+		<i class="ti ti-refresh"></i>
+	</MkButton>
 </div>
 </template>
 
@@ -58,5 +56,14 @@ onUnmounted(() => {
 
 .command {
 	margin-top: 8px;
+}
+
+.refreshButton {
+	display: flex;
+	min-width: 40px !important;
+	width: 40px;
+	height: 40px;
+	align-items: center;
+	justify-content: center;
 }
 </style>
