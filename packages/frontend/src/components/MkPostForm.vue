@@ -20,6 +20,9 @@ SPDX-License-Identifier: AGPL-3.0-only
 		</div>
 		<div :class="$style.headerRight">
 			<template v-if="!(channel != null && fixed)">
+				<button v-tooltip="openMarkdownGuideTooltip" :class="['_button', $style.headerRightItem, $style.visibility]" @click="openMarkdownGuide">
+					<span><i class="ti ti-pencil-search"></i></span>
+				</button>
 				<button v-if="channel == null" ref="visibilityButton" v-click-anime v-tooltip="i18n.ts.visibility" :class="['_button', $style.headerRightItem, $style.visibility]" @click="setVisibility">
 					<span v-if="visibility === 'public'"><i class="ti ti-world"></i></span>
 					<span v-if="visibility === 'home'"><i class="ti ti-home"></i></span>
@@ -937,6 +940,9 @@ function openAccountMenu(ev: MouseEvent) {
 		},
 	}, ev);
 }
+
+const openMarkdownGuide = () => os.popup(defineAsyncComponent(() => import('@/components/YodangangMarkdownGuide.vue')), {});
+const openMarkdownGuideTooltip = 'MFM 가이드';
 
 onMounted(() => {
 	if (props.autofocus) {
