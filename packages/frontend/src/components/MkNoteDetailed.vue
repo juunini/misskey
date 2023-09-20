@@ -91,6 +91,9 @@ SPDX-License-Identifier: AGPL-3.0-only
 						<Mfm :text="translation.text" :author="appearNote.user" :nyaize="'respect'" :emojiUrls="appearNote.emojis"/>
 					</div>
 				</div>
+
+				<YodangangTranslate :note="note"/>
+
 				<div v-if="appearNote.files && appearNote.files.length > 0">
 					<MkMediaList :mediaList="appearNote.files"/>
 				</div>
@@ -198,6 +201,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 import { computed, inject, onMounted, provide, ref, shallowRef } from 'vue';
 import * as mfm from 'mfm-js';
 import * as Misskey from 'misskey-js';
+import YodangangTranslate from './YodangangTranslate.vue';
 import MkNoteSub from '@/components/MkNoteSub.vue';
 import MkNoteSimple from '@/components/MkNoteSimple.vue';
 import MkReactionsViewer from '@/components/MkReactionsViewer.vue';
@@ -328,6 +332,9 @@ const reactionsPagination = computed<Paging>(() => ({
 		type: reactionTabType.value,
 	},
 }));
+
+provide('translating', translating);
+provide('translation', translation);
 
 useNoteCapture({
 	rootEl: rootEl,

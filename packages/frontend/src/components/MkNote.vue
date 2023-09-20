@@ -79,7 +79,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 						</div>
 					</div>
 
-					<YodangangTranslate :note="note"></YodangangTranslate>
+					<YodangangTranslate :note="note"/>
 
 					<div v-if="appearNote.files && appearNote.files.length > 0">
 						<MkMediaList :mediaList="appearNote.files"/>
