@@ -18,6 +18,7 @@ RUN apt install -y tini
 WORKDIR /misskey
 
 RUN mkdir -p /misskey/packages/backend
+RUN mkdir -p /misskey/packages/frontend
 RUN mkdir -p /misskey/.config
 
 COPY --from=builder /misskey/built /misskey/built
@@ -31,6 +32,7 @@ COPY --from=builder /misskey/packages/backend/ormconfig.js /misskey/packages/bac
 COPY --from=builder /misskey/packages/backend/node_modules /misskey/packages/backend/node_modules
 COPY --from=builder /misskey/packages/backend/built /misskey/packages/backend/built
 COPY --from=builder /misskey/packages/backend/assets /misskey/packages/backend/assets
+COPY --from=builder /misskey/packages/frontend/assets /misskey/packages/frontend/assets
 COPY --from=builder /misskey/fluent-emojis /misskey/fluent-emojis
 
 ENV NODE_ENV=production
