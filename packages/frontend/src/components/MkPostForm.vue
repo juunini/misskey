@@ -1066,6 +1066,11 @@ defineExpose({
 	padding-left: 4px;
 }
 
+.headerRight {
+	flex-wrap: wrap;
+	justify-content: flex-end;
+}
+
 .submit {
 	margin: 12px 12px 12px 6px;
 	vertical-align: bottom;
