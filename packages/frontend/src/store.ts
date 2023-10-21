@@ -264,7 +264,7 @@ export const defaultStore = markRaw(new Storage('base', {
 	},
 	showFixedPostForm: {
 		where: 'device',
-		default: false,
+		default: !/mobile|iphone|android/.test(navigator.userAgent.toLowerCase()),
 	},
 	showFixedPostFormInChannel: {
 		where: 'device',
