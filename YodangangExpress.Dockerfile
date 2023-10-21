@@ -41,4 +41,4 @@ HEALTHCHECK --interval=5s --retries=20 CMD ["/bin/bash", "/misskey/healthcheck.s
 ENTRYPOINT ["/usr/bin/tini", "--"]
 
 EXPOSE 3000
-CMD ["pnpm", "run", "start"]
+CMD ["pnpm", "run", "migrateandstart"]
