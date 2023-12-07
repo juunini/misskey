@@ -507,6 +507,14 @@ export class FileServerService {
 			};
 		} catch (e) {
 			cleanup();
+
+			if (process.env.CLOUD_STORAGE_ORIGIN && url.startsWith(process.env.CLOUD_STORAGE_ORIGIN)) {
+				const key = url.replace(process.env.CLOUD_STORAGE_ORIGIN, '').split('/').shift();
+				if (!key) throw e;
+
+				return await this.getFileFromKey(key) as any;
+			}
+
 			throw e;
 		}
 	}
