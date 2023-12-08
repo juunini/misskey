@@ -5,6 +5,7 @@ WORKDIR /misskey
 USER root
 
 ENV NODE_ENV=production
+ENV VITE_CLOUD_STORAGE_ORIGIN=https://storage.googleapis.com/yodangang-express/
 
 RUN git submodule update --init
 RUN corepack enable
