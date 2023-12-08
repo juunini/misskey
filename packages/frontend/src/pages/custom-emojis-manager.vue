@@ -31,7 +31,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 						<template #default="{items}">
 							<div class="ldhfsamy">
 								<button v-for="emoji in items" :key="emoji.id" class="emoji _panel _button" :class="{ selected: selectedEmojis.includes(emoji.id) }" @click="selectMode ? toggleSelect(emoji) : edit(emoji)">
-									<img :src="`/emoji/${emoji.name}.webp`" class="img" :alt="emoji.name"/>
+									<img :src="emoji.url" class="img" :alt="emoji.name"/>
 									<div class="body">
 										<div class="name _monospace">{{ emoji.name }}</div>
 										<div class="info">{{ emoji.category }}</div>
@@ -87,6 +87,10 @@ import { i18n } from '@/i18n.js';
 import { definePageMetadata } from '@/scripts/page-metadata.js';
 
 const emojisPaginationComponent = shallowRef<InstanceType<typeof MkPagination>>();
+
+setInterval(() => {
+	console.log(emojisPaginationComponent.value?.items.values().next().value);
+}, 3000);
 
 const tab = ref('local');
 const query = ref<string | null>(null);
