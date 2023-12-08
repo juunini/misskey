@@ -66,6 +66,10 @@ const rawUrl = computed(() => {
 const url = computed(() => {
 	if (rawUrl.value == null) return undefined;
 
+	if (import.meta.env.VITE_CLOUD_STORAGE_ORIGIN && rawUrl.value.startsWith(import.meta.env.VITE_CLOUD_STORAGE_ORIGIN)) {
+		return rawUrl.value;
+	}
+
 	const proxied =
 		(rawUrl.value.startsWith('/emoji/') || (props.useOriginalSize && isLocal.value))
 			? rawUrl.value
