@@ -21,6 +21,7 @@ import { initializeSw } from '@/scripts/initialize-sw.js';
 import { deckStore } from '@/ui/deck/deck-store.js';
 import { emojiPicker } from '@/scripts/emoji-picker.js';
 import { mainRouter } from '@/router/main.js';
+import { customAchievementsInMainBoot } from '@/pages/user/customAchievements.js';
 
 export async function mainBoot() {
 	const { isClientUpdated } = await common(() => createApp(
@@ -230,6 +231,8 @@ export async function mainBoot() {
 		window.setTimeout(() => {
 			claimAchievement('client60min');
 		}, 1000 * 60 * 60);
+
+		customAchievementsInMainBoot();
 
 		const lastUsed = miLocalStorage.getItem('lastUsed');
 		if (lastUsed) {

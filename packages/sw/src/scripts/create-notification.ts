@@ -6,6 +6,7 @@
 /*
  * Notification manager for SW
  */
+import { customAchievementTitle } from './custom-achievements.js';
 import type { BadgeNames, PushNotificationDataMap } from '@/types.js';
 import { char2fileName } from '@/scripts/twemoji-base.js';
 import { cli } from '@/scripts/operations.js';
@@ -205,7 +206,7 @@ async function composeNotification(data: PushNotificationDataMap[keyof PushNotif
 
 				case 'achievementEarned':
 					return [t('_notification.achievementEarned'), {
-						body: t(`_achievements._types._${data.body.achievement}.title`),
+						body: customAchievementTitle(data.body.achievement) || t(`_achievements._types._${data.body.achievement}.title`),
 						badge: iconUrl('medal'),
 						data,
 						tag: `achievement:${data.body.achievement}`,

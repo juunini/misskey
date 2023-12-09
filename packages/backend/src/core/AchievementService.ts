@@ -9,6 +9,7 @@ import type { MiUser } from '@/models/User.js';
 import { DI } from '@/di-symbols.js';
 import { bindThis } from '@/decorators.js';
 import { NotificationService } from '@/core/NotificationService.js';
+import { customAchievementTypes } from '@/core/CustomAchievements.js';
 
 export const ACHIEVEMENT_TYPES = [
 	'notes1',
@@ -89,6 +90,7 @@ export const ACHIEVEMENT_TYPES = [
 	'tutorialCompleted',
 	'bubbleGameExplodingHead',
 	'bubbleGameDoubleExplodingHead',
+	...customAchievementTypes,
 ] as const;
 
 @Injectable()

@@ -5,6 +5,7 @@
 
 import { misskeyApi } from '@/scripts/misskey-api.js';
 import { $i } from '@/account.js';
+import { customAchievementTypes, customAchievementBadges } from '@/pages/user/customAchievements.js';
 
 export const ACHIEVEMENT_TYPES = [
 	'notes1',
@@ -85,6 +86,7 @@ export const ACHIEVEMENT_TYPES = [
 	'tutorialCompleted',
 	'bubbleGameExplodingHead',
 	'bubbleGameDoubleExplodingHead',
+	...customAchievementTypes,
 ] as const;
 
 export const ACHIEVEMENT_BADGES = {
@@ -478,6 +480,7 @@ export const ACHIEVEMENT_BADGES = {
 		bg: 'linear-gradient(0deg, rgb(255 77 77), rgb(247 155 214))',
 		frame: 'silver',
 	},
+	...customAchievementBadges,
 /* @see <https://github.com/misskey-dev/misskey/pull/10365#discussion_r1155511107>
 } as const satisfies Record<typeof ACHIEVEMENT_TYPES[number], {
 	img: string;
