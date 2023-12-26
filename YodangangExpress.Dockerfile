@@ -1,4 +1,4 @@
-FROM juunini/misskey:builder-0.2 AS builder
+FROM juunini/misskey:builder-0.3 AS builder
 
 COPY . /misskey
 WORKDIR /misskey
@@ -12,7 +12,7 @@ RUN corepack enable
 RUN pnpm install
 RUN pnpm build
 
-FROM juunini/misskey:builder-0.2
+FROM juunini/misskey:builder-0.3
 
 RUN apt install -y tini
 
