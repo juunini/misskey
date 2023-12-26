@@ -69,7 +69,7 @@ export function customAchievementTitle(achievement?: string): string {
 		case 'happyNewYear2024':
 			return 'HAPPY NEW YEAR!';
 	}
-	return '???';
+	return '';
 }
 
 export function customAchievementDescription(achievement: string): string {
@@ -83,7 +83,7 @@ export function customAchievementDescription(achievement: string): string {
 		case 'happyNewYear2024':
 			return '2024년 1월 1일에 접속했습니다.';
 	}
-	return '???';
+	return '';
 }
 
 export function customAchievementFlavor(achievement: string): string {
