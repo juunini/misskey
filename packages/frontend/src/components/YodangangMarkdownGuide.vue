@@ -9,19 +9,19 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted } from 'vue';
+import { onMounted, shallowRef, ref } from 'vue';
 import MkModal from '@/components/MkModal.vue';
 
-const modal = $shallowRef<InstanceType<typeof MkModal>>();
+const modal = shallowRef<InstanceType<typeof MkModal>>();
 
 const emit = defineEmits<{
 	(ev: 'closed'): void;
 }>();
 
-let guide = $ref('');
+let guide = ref('');
 
 onMounted(async () => {
-	guide = await fetch('/api/pages/show', {
+	guide.value = await fetch('/api/pages/show', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
