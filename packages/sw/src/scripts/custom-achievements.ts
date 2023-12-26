@@ -7,6 +7,8 @@ export function customAchievementTitle(achievement?: string): string {
 			return '지상 최강의 개발자?';
 		case 'happyXmas2023':
 			return 'HAPPY X-MAS 2023';
+		case 'happyNewYear2024':
+			return 'HAPPY NEW YEAR!';
 	}
   
 	return '';

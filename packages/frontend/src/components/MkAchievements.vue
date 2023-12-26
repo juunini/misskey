@@ -23,13 +23,13 @@ SPDX-License-Identifier: AGPL-3.0-only
 			</div>
 			<div :class="$style.body">
 				<div :class="$style.header">
-					<span :class="$style.title">{{ i18n.ts._achievements._types['_' + achievement.name]?.title ?? customAchievementTitle(achievement.name) }}</span>
+					<span :class="$style.title">{{ i18n.ts._achievements._types['_' + achievement.name]?.title || customAchievementTitle(achievement.name) }}</span>
 					<span :class="$style.time">
 						<time v-tooltip="new Date(achievement.unlockedAt).toLocaleString()">{{ new Date(achievement.unlockedAt).getFullYear() }}/{{ new Date(achievement.unlockedAt).getMonth() + 1 }}/{{ new Date(achievement.unlockedAt).getDate() }}</time>
 					</span>
 				</div>
-				<div :class="$style.description">{{ withDescription ? (i18n.ts._achievements._types['_' + achievement.name]?.description ?? customAchievementDescription(achievement.name)) : '???' }}</div>
-				<div v-if="(i18n.ts._achievements._types['_' + achievement.name]?.flavor || customAchievementFlavor(achievement.name)) && withDescription" :class="$style.flavor">{{ i18n.ts._achievements._types['_' + achievement.name]?.flavor ?? customAchievementFlavor(achievement.name) }}</div>
+				<div :class="$style.description">{{ withDescription ? (i18n.ts._achievements._types['_' + achievement.name]?.description || customAchievementDescription(achievement.name)) : '???' }}</div>
+				<div v-if="(i18n.ts._achievements._types['_' + achievement.name]?.flavor || customAchievementFlavor(achievement.name)) && withDescription" :class="$style.flavor">{{ i18n.ts._achievements._types['_' + achievement.name]?.flavor || customAchievementFlavor(achievement.name) }}</div>
 			</div>
 		</div>
 		<template v-if="withLocked">
