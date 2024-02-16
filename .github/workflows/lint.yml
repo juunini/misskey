@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master
-      - develop
+      - no-develop
     paths:
       - packages/backend/**
       - packages/frontend/**

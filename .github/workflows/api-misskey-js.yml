@@ -4,9 +4,13 @@ on:
   push:
     paths:
       - packages/misskey-js/**
+    branches:
+      - no-develop
   pull_request:
     paths:
       - packages/misskey-js/**
+    branches:
+      - no-develop
 
 jobs:
   report:

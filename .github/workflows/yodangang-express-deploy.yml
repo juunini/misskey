@@ -1,4 +1,4 @@
-name: Deploy Google Cloud Run
+name: Build and Push Docker Image
 
 on:
   push:
