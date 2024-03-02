@@ -33,6 +33,7 @@ COPY --from=builder /misskey/packages/backend/ormconfig.js /misskey/packages/bac
 COPY --from=builder /misskey/packages/backend/node_modules /misskey/packages/backend/node_modules
 COPY --from=builder /misskey/packages/backend/built /misskey/packages/backend/built
 COPY --from=builder /misskey/packages/backend/assets /misskey/packages/backend/assets
+COPY --from=builder /misskey/packages/backend/migration /misskey/packages/backend/migration
 COPY --from=builder /misskey/packages/frontend/assets /misskey/packages/frontend/assets
 COPY --from=builder /misskey/packages/misskey-js/package.json /misskey/packages/misskey-js/package.json
 COPY --from=builder /misskey/packages/misskey-js/built /misskey/packages/misskey-js/built
