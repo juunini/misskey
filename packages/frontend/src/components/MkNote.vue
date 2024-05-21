@@ -314,6 +314,8 @@ provide('react', (reaction: string) => {
 		reaction: reaction,
 	});
 });
+provide('translating', translating);
+provide('translation', translation);
 
 if (props.mock) {
 	watch(() => props.note, (to) => {
