@@ -14,7 +14,7 @@ import { Ref, inject } from 'vue';
 import * as Misskey from 'misskey-js';
 import { miLocalStorage } from '@/local-storage.js';
 import { i18n } from '@/i18n.js';
-import * as os from '@/os.js';
+import { misskeyApi } from '@/scripts/misskey-api.js';
 
 const props = defineProps<{
   note: Misskey.entities.Note;
@@ -27,7 +27,7 @@ async function translate(): Promise<void> {
 	if (translation?.value != null) return;
 
 	translating!.value = true;
-	const res = await os.api('notes/translate', {
+	const res = await misskeyApi('notes/translate', {
 		noteId: props.note.id,
 		targetLang: miLocalStorage.getItem('lang') ?? navigator.language,
 	});
